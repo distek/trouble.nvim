@@ -297,4 +297,12 @@ function Trouble.get_items()
   end
 end
 
+function Trouble.set_win(win)
+  if vim.api.nvim_win_is_valid(win) then
+    view.win = win
+  else
+    vim.error("winid provided is not valid")
+  end
+end
+
 return Trouble
