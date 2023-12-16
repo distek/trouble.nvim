@@ -239,4 +239,14 @@ function M.make_position_params(win, buf)
   }
 end
 
+function M.ignore_ft(filetype)
+  for _, v in ipairs(config.options.ignored_filetypes) do
+    if v == filetype then
+      return true
+    end
+  end
+
+  return false
+end
+
 return M

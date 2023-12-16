@@ -23,9 +23,9 @@ function Trouble.setup(options)
   colors.setup()
 end
 
-function Trouble.close()
+function Trouble.close(focus_parent)
   if Trouble.is_open() then
-    view:close()
+    view:close(focus_parent)
   end
 end
 
@@ -181,7 +181,9 @@ function Trouble.action(action)
   end
 
   if view and action == "on_win_enter" then
-    view:on_win_enter()
+    if not util.ignore_ft(vim.bo[vim.api.nvim_get_current_buf()].filetype) then
+      view:on_win_enter()
+    end
   end
   if not Trouble.is_open() then
     return Trouble

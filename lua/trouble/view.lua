@@ -348,11 +348,13 @@ function View:switch_to_parent()
   View.switch_to(self.parent)
 end
 
-function View:close()
+function View:close(focus_parent)
   util.debug("close")
   if vim.api.nvim_win_is_valid(self.win) then
-    if vim.api.nvim_win_is_valid(self.parent) then
-      vim.api.nvim_set_current_win(self.parent)
+    if focus_parent or focus_parent == nil then
+      if vim.api.nvim_win_is_valid(self.parent) then
+        vim.api.nvim_set_current_win(self.parent)
+      end
     end
     vim.api.nvim_win_close(self.win, {})
   end
