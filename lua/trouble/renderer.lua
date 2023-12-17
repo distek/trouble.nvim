@@ -33,6 +33,9 @@ end
 ---@param view TroubleView
 function renderer.render(view, opts)
   opts = opts or {}
+  if not vim.api.nvim_win_is_valid(view.parent) then
+    return
+  end
   local buf = vim.api.nvim_win_get_buf(view.parent)
   providers.get(view.parent, buf, function(items, messages)
     local auto_jump = vim.tbl_contains(config.options.auto_jump, opts.mode)
